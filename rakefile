@@ -1,5 +1,5 @@
 WAX_FILES = FileList["*"].exclude(/^(examples|xcode-template|framework|tools)/)
-TARGET_XCODE_TEMPLATE = "#{ENV['HOME']}/Library/Application Support/Developer/Shared/Xcode/Project Templates/Wax/Wax iPhone App"
+TARGET_XCODE_TEMPLATE = "#{ENV['HOME']}/Library/Developer/Xcode/Templates/Wax/Wax iPhone App.xctemplate"
 WAX_ROOT = File.expand_path("..", __FILE__)
 
 task :default => :install
@@ -22,20 +22,20 @@ namespace :template do
     puts
     puts "Wax Xcode Template Installed!"
     puts "-----------------------------"
-    puts 
+    puts
   end
 
   desc "Prepare xcode template for editing"
   task :edit => :clean do
     ln_s WAX_ROOT, "xcode-template/wax"
-  
+
     `open xcode-template/___PROJECTNAME___.xcodeproj`
   end
 
   desc "Cleans up xcode template for packaging"
   task :clean do
     rm_r File.dirname(TARGET_XCODE_TEMPLATE), :force => true
-    
+
     rm_r "xcode-template/wax", :force => true
     rm_r "xcode-template/build", :force => true
   end
